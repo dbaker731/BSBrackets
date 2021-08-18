@@ -1,0 +1,17 @@
+.me-auto {
+    margin-right: auto;
+}
+
+input {
+    margin-right: 10px;
+}
+
+.dropdown-toggle, .dropdown-item {
+    cursor: pointer;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #fff;
+}
