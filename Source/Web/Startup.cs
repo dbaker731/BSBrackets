@@ -13,14 +13,16 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Repository;
+using Web.Extensions;
 
 namespace Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IConfiguration _config;
+        public Startup(IConfiguration config)
         {
-            Configuration = configuration;
+            _config = config;
         }
 
         public IConfiguration Configuration { get; }
@@ -28,11 +30,8 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<Logic>();
-            services.AddScoped<Mapper>();
-            services.AddScoped<Repo>();
-            services.AddScoped<BSDbContext>();
-
+            services.AddAppServices(_config);
+            services.AddIdentityServices(_config);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

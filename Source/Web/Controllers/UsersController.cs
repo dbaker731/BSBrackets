@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using BSBRackets;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Models;
+using Models.Models;
 
 namespace Web.Controllers
 {

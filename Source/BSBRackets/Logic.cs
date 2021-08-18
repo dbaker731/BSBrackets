@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
-using Models;
+using Models.DTOs;
+using Models.Models;
 using Repository;
 
 namespace BSBRackets
@@ -31,5 +34,44 @@ namespace BSBRackets
         {
             return _repo.GetUserByIdNonAsync(id);
         }
+
+        // Account controller
+        public async Task<AppUser> RegisterUser(RegisterDto registerDto)
+        {
+            using var hmac = new HMACSHA512();
+            AppUser user = new AppUser()
+            {
+                UserName = registerDto.Username.ToLower(),
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+                PasswordSalt = hmac.Key
+            };
+            return await _repo.RegisterUser(user);
+        }
+
+        public async Task<AppUser> LoginUser(LoginDto loginDto)
+        {
+            AppUser user = await _repo.LoginUser(loginDto.Username);
+            return user;
+        }
+
+        public AppUser CheckPassword(AppUser user, LoginDto loginDto)
+        {
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if (computedHash[i] != user.PasswordHash[i])
+                {
+                    return null;
+                }
+            }
+            return user;
+        }
+
+        public async Task<bool> UserExists(string username)
+        {
+            return await _repo.UserExists(username);
+        }
+
     }
 }
