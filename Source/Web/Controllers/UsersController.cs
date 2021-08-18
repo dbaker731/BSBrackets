@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BSBRackets;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Models;
@@ -20,7 +21,7 @@ namespace Web.Controllers
         }
 
         // api/users
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IEnumerable<AppUser>> GetUsers()
         {
@@ -28,7 +29,7 @@ namespace Web.Controllers
         }
 
         // api/users/1
-        //[Authorize]
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUserById(int id)
         {

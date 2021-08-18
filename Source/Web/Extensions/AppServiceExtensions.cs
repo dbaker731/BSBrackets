@@ -20,6 +20,7 @@ namespace Web.Extensions
             services.AddScoped<Repo>();
             services.AddScoped<BSDbContext>();
             services.AddScoped<ITokenService, TokenService>();
+            // add connection string eventually
             return services;
         }
         
