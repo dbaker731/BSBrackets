@@ -27,7 +27,8 @@ namespace Web.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            if (await _logic.UserExists(registerDto.Username))
+            bool userExists = await _logic.UserExists(registerDto.Username);
+            if (userExists)
             {
                 return BadRequest("Username is taken");
             }
