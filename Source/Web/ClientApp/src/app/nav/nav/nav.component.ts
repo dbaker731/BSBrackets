@@ -11,13 +11,13 @@ export class NavComponent implements OnInit {
 
   constructor(public accountService: AccountService, private router: Router) { }
 
-  model: any = {}
+  loginModel: any = {}
 
   ngOnInit(): void {
   }
 
   login() {
-    this.accountService.login(this.model).subscribe(data => {
+    this.accountService.login(this.loginModel).subscribe(data => {
       // this.router.navigateByUrl('/members');
     }, err => {
       console.log(err);

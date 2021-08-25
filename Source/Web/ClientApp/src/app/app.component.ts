@@ -10,25 +10,15 @@ import { UsersService } from './_services/users.service';
 })
 export class AppComponent implements OnInit {
   title = 'BS Brackets';
-  users: any;
-
-  constructor(private usersSerive: UsersService, private accountService: AccountService) {}
+  
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
-    this.getUsers();
     this.setCurrentUser();
   }
 
   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user'));
     this.accountService.setCurrentUser(user);
-  }
-
-  getUsers() {
-    this.usersSerive.getUsers().subscribe( result => {
-      this.users = result;
-    }, err => {
-      console.log(err);
-    })
   }
 }

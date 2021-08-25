@@ -34,13 +34,13 @@
         <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex" autocomplete="off" *ngIf="(accountService.currentUser$ | async) === null">
           <input
             name="username"
-            [(ngModel)]="model.username"
+            [(ngModel)]="loginModel.username"
             class="form-control me-2"
             type="text"
             placeholder="Username">
           <input
             name="password"
-            [(ngModel)]="model.password"
+            [(ngModel)]="loginModel.password"
             class="form-control me-2"
             type="password"
             placeholder="Password">
