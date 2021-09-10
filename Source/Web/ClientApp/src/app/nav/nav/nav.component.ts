@@ -24,8 +24,6 @@ export class NavComponent implements OnInit {
   login() {
     this.accountService.login(this.loginModel).subscribe(result => {
       this.router.navigateByUrl('/brackets');
-    }, err => {
-      this.toastr.error(err.error);
     })
   }
 

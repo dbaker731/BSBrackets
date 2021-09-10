@@ -49,14 +49,14 @@ namespace Web.Controllers
 
             if (loginUser == null)
             {
-                return Unauthorized("Invalid username");
+                return Unauthorized("Username and password combination does not exist.");
             }
 
             AppUser user = _logic.CheckPassword(loginUser, loginDto);
 
             if (user == null)
             {
-                return Unauthorized("Invalid password");
+                return Unauthorized("Username and password combination does not exist.");
             }
 
             return new UserDto

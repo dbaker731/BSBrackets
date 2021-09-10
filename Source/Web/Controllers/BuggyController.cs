@@ -20,11 +20,12 @@ namespace Web.Controllers
             _logic = logic;
         }
 
-        [Authorize]
+        //[Authorize]
+        // look at this
         [HttpGet("auth")]
-        public ActionResult<string> GetSecret()
+        public ActionResult<string> GetAuth()
         {
-            return "secret text";
+            return Unauthorized("Unauthorized.");
         }
 
         [HttpGet("not-found")]
@@ -51,7 +52,7 @@ namespace Web.Controllers
         [HttpGet("bad-request")]
         public ActionResult<string> GetBadRequest()
         {
-            return BadRequest("This was a bad request");
+            return BadRequest("Bad Request.");
         }
     }
 }

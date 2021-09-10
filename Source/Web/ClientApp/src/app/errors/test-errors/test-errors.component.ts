@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 export class TestErrorsComponent implements OnInit {
 
   baseUrl = environment.apiUrl;
+  validationErrors: string[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -53,6 +54,7 @@ export class TestErrorsComponent implements OnInit {
       console.log(response);
     }, err => {
       console.log(err);
+      this.validationErrors = err;
     })
   }
 
